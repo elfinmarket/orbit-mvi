@@ -80,3 +80,7 @@ kotlin {
         }
     }
 }
+
+tasks.withType<Sign> {
+    onlyIf { System.getenv("JITPACK") != "true" }
+}

@@ -74,3 +74,7 @@ kotlin {
         iosSimulatorArm64Test.dependsOn(iosTest)
     }
 }
+
+tasks.withType<Sign> {
+    onlyIf { System.getenv("JITPACK") != "true" }
+}

@@ -26,3 +26,7 @@ dependencies {
 
     implementation(ProjectDependencies.androidxComposeRuntime)
 }
+
+tasks.withType<Sign> {
+    onlyIf { System.getenv("JITPACK") != "true" }
+}

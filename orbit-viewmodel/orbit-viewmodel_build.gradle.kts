@@ -50,3 +50,7 @@ dependencies {
 android {
     testOptions.unitTests.isIncludeAndroidResources = true
 }
+
+tasks.withType<Sign> {
+    onlyIf { System.getenv("JITPACK") != "true" }
+}

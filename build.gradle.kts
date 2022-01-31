@@ -130,6 +130,7 @@ subprojects {
     }
     plugins.withType<org.jetbrains.dokka.gradle.DokkaPlugin> {
         tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+            onlyIf { System.getenv("JITPACK") != "true" }
             dokkaSourceSets {
                 configureEach {
                     if (name.startsWith("ios")) {
@@ -224,7 +225,12 @@ markdownlint {
 }
 
 val copyDokkaToWebsite by tasks.registering(Copy::class) {
+    onlyIf { System.getenv("JITPACK") != "true" }
     dependsOn("dokkaHtmlMultiModule")
     from(files("build/dokka/htmlMultiModule"))
     into(file("website/static/dokka"))
+}
+
+tasks.withType<Sign> {
+    onlyIf { System.getenv("JITPACK") != "true" }
 }
